@@ -22,12 +22,12 @@ Whether you're a student beginning your journey into computer science or an educ
 
 This project and its contents are provided for educational use only.
 
-You are free to:
-
-- Use and share this work for educational and non-commercial purposes.
+You are welcome to use and share the materials for personal learning or teaching, provided that proper attribution is given.
 
 You may NOT:
 
 - Use this work for commercial purposes.  
 - Redistribute it without proper credit.  
 - Claim this work as your own.
+
+Thank you for supporting respectful educational sharing.
