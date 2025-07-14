@@ -12,7 +12,10 @@ The project includes:
 - Java implementations and detailed explanations of key data structures  
 - Implementations and clear explanations of popular sorting algorithms  
 - A guide to time complexity and algorithm analysis  
-- Visual examples and step-by-step walkthroughs to enhance understanding
+- Visual examples and step-by-step walkthroughes to enhance understanding
+
+
+  A general overview of covered topics is available in `docs/intro/introduction-to-data-structures.pdf`.
 
 Whether you're a student beginning your journey into computer science or an educator seeking clear teaching materials, this project aims to be a practical and helpful learning resource.
 
@@ -23,6 +26,7 @@ Whether you're a student beginning your journey into computer science or an educ
 
 - **Educational Documents:**  
   Stored as PDF files in the `docs/` folder, organized by topic.
+  
 
 ## License and Usage
 
