@@ -16,7 +16,7 @@ The project includes:
 
 Whether you're a student beginning your journey into computer science or an educator seeking clear teaching materials, this project aims to be a practical and helpful learning resource.
 
-## Project Structure and Resources
+## Project Structure
 
 - **Java Source Code:**  
   Located in the `src/com/github/mniabedii/` directory, organized by topic (e.g., `src/com/github/mniabedii/array/`).
