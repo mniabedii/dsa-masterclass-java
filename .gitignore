@@ -1,0 +1,43 @@
+# Ignore object files
+*.o
+
+# Ignore executable files (common names)
+a.out
+*.exe
+
+# Ignore compiled libraries
+*.so
+*.a
+*.dll
+
+# Ignore debug files
+*.dSYM/
+
+# Ignore editor swap and backup files
+*~
+*.swp
+*.swo
+
+# Ignore build directories (if you have any)
+build/
+bin/
+obj/
+
+# Ignore dependency files
+*.d
+
+# Ignore coverage files
+*.gcda
+*.gcno
+
+# Ignore logs and temp files
+*.log
+tmp/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# other
+*.iml
