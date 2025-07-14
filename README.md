@@ -15,7 +15,7 @@ The project includes:
 - Visual examples and step-by-step walkthroughes to enhance understanding
 
 
-  A general overview of covered topics is available in `docs/intro/introduction-to-data-structures.pdf`.
+A general overview of covered topics is available in `docs/intro/introduction-to-data-structures.pdf`.
 
 Whether you're a student beginning your journey into computer science or an educator seeking clear teaching materials, this project aims to be a practical and helpful learning resource.
 
