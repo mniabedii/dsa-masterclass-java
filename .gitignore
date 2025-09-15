@@ -1,6 +1,9 @@
 # Ignore object files
 *.o
 
+# Ignore word backup files
+*.docx
+
 # Ignore executable files (common names)
 a.out
 *.exe
