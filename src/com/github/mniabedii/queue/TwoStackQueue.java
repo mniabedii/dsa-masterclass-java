@@ -54,7 +54,7 @@ public class TwoStackQueue {
         /**
          * Peek: O(1)
          */
-        public int peek() throws Exception {
+        public int peek() {
             if (isEmpty()) {
                 System.out.println("Queue underflow");
             }
