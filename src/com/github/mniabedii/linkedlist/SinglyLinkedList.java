@@ -1,7 +1,7 @@
 package com.github.mniabedii.linkedlist;
 
 public class SinglyLinkedList {
-    SinglyNode head;
+    private SinglyNode head;
 
     // first node of the linked list
     public SinglyNode getHead() {
@@ -33,20 +33,15 @@ public class SinglyLinkedList {
     // O(n)
     public void addLast(int value) {
         SinglyNode newNode = new SinglyNode(value);
-
-        // empty list
         if (head == null) {
             head = newNode;
             return;
         }
-
         SinglyNode currentNode = head;
-        SinglyNode prevNode = null;
-        while (currentNode != null) {
-            prevNode = currentNode;
+        while (currentNode.nextNode != null) {
             currentNode = currentNode.nextNode;
         }
-        prevNode.nextNode = newNode;
+        currentNode.nextNode = newNode;
     }
 
     // Removes the first element of the list
@@ -78,7 +73,7 @@ public class SinglyLinkedList {
             return;
         }
 
-        // when the value matches teh head
+        // when the value matches the head
         while (head != null && head.value == value) {
             head = head.nextNode;
         }
@@ -154,7 +149,6 @@ public class SinglyLinkedList {
     }
 
     // Reversing the linked list
-    // O(n)
     // O(n)
     public void reverse() {
         SinglyNode currentNode = head;
