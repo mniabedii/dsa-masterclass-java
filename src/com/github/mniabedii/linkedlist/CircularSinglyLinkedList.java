@@ -4,6 +4,10 @@ public class CircularSinglyLinkedList {
     private SinglyNode head;
     private SinglyNode tail;
 
+    public SinglyNode getHead() {
+        return this.head;
+    }
+
     public boolean isEmpty() {
         return head == null;
     }
