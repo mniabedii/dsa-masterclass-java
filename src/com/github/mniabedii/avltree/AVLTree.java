@@ -18,7 +18,8 @@ public class AVLTree {
 
     // Utility function to get the balance factor of a node
     private int getBalance(AVLNode node) {
-        if (node == null) return 0;
+        if (node == null)
+            return 0;
         return height(node.left) - height(node.right);
     }
 
@@ -66,20 +67,25 @@ public class AVLTree {
     // but there must be a private insert to overwrite the existing tree
     private AVLNode insert(AVLNode node, int value) {
         // Perform the normal BST insertion
-        if (node == null) return new AVLNode(value);
+        if (node == null)
+            return new AVLNode(value);
 
         if (value < node.value)
             node.left = insert(node.left, value);
         else if (value > node.value)
             node.right = insert(node.right, value);
-        else return node;
+        else
+            return node;
 
         // update the height & get the new balance
-        /* This part also runs, every time that the function is recursively called
-            So, as soon as we get to a node that has imbalance, the balancing function will work
-            THERE IS NOT NECESSARILY A UNIQUE ANSWER TO THIS QUESTION
-
-            ... A tree may need to get balanced several times */
+        /*
+         * This part also runs, every time that the function is recursively called
+         * So, as soon as we get to a node that has imbalance, the balancing function
+         * will work
+         * THERE IS NOT NECESSARILY A UNIQUE ANSWER TO THIS QUESTION
+         * 
+         * ... A tree may need to get balanced several times
+         */
 
         node.height = Math.max(height(node.left), height(node.right)) + 1;
         int balance = getBalance(node);
@@ -92,7 +98,8 @@ public class AVLTree {
                 return rightRotate(node);
             }
 
-            // Left-Right (LR) Case -> Perform a left rotation on the left child, then a right rotation on the node.
+            // Left-Right (LR) Case -> Perform a left rotation on the left child, then a
+            // right rotation on the node.
             if (value > node.left.value) { // insertion in the right subtree of the left child
                 node.left = leftRotate(node.left);
                 return rightRotate(node);
@@ -106,7 +113,8 @@ public class AVLTree {
                 return leftRotate(node);
             }
 
-            // Right-Left (RL) Case -> Perform a right rotation on the right child, then a left rotation on the node.
+            // Right-Left (RL) Case -> Perform a right rotation on the right child, then a
+            // left rotation on the node.
             if (value < node.right.value) { // insertion in the left subtree of the right child
                 node.right = rightRotate(node.right);
                 return leftRotate(node);
@@ -139,9 +147,10 @@ public class AVLTree {
             // Node with one child or no child
             if ((root.left == null) || (root.right == null)) {
                 AVLNode temp;
-                if (root.left != null) temp = root.left;
-                    else
-                        temp = root.right;
+                if (root.left != null)
+                    temp = root.left;
+                else
+                    temp = root.right;
 
                 // Not & One child case
                 root = temp;
@@ -158,7 +167,8 @@ public class AVLTree {
         }
 
         // If the tree had only one node, return null
-        if (root == null) return null;
+        if (root == null)
+            return null;
 
         // Update height of the current node & get the new balance
         root.height = Math.max(height(root.left), height(root.right)) + 1;
@@ -218,7 +228,8 @@ public class AVLTree {
 
     public AVLNode search(AVLNode node, int value) {
         // Base case: root is null or key is present at the root
-        if (node == null || node.value == value) return node;
+        if (node == null || node.value == value)
+            return node;
 
         // Value is smaller than root's value
         if (value < node.value) {
@@ -228,7 +239,6 @@ public class AVLTree {
         // Value is greater than root's value
         return search(node.right, value);
     }
-
 
     // TRAVERSALS:
 
@@ -301,5 +311,22 @@ public class AVLTree {
             postOrder(node.right);
             System.out.print(node.value + " ");
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        buildString(root, sb, 0);
+        return sb.toString();
+    }
+
+    private void buildString(AVLNode node, StringBuilder sb, int depth) {
+        if (node == null) {
+            sb.append("  ".repeat(depth)).append("null\n");
+            return;
+        }
+        sb.append("  ".repeat(depth)).append(node.value).append(" (h=").append(node.height).append(")\n");
+        buildString(node.left, sb, depth + 1);
+        buildString(node.right, sb, depth + 1);
     }
 }
