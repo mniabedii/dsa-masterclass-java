@@ -3,6 +3,7 @@ package com.github.mniabedii.timecomplexity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.random;
 
 public class TimeComplexity {
 
@@ -174,21 +175,21 @@ public class TimeComplexity {
         // }
 
         // LIS
-        // int[] arr1 = { 10, 9, 2, 5, 3, 7, 101, 18 };
-        // int[] arr2 = { 3, 10, 2, 1, 20, 4, 6, 7, 8, 9,
-        // 15, 25, 5, 11, 13, 50, 60, 70, 80, 90 };
+        int[] arr1 = { 10, 9, 2, 5, 3, 7, 101, 18 };
+        int[] arr2 = { 3, 10, 2, 1, 20, 4, 6, 7, 8, 9,
+                15, 25, 5, 11, 13, 50, 60, 70, 80, 90 };
 
-        // Random rand = new Random();
-        // int n = 100;
-        // int[] arr3 = new int[n];
-        // for (int i = 0; i < n; i++) {
-        // arr3[i] = rand.nextInt(1_000_000); // random numbers up to 1 million
-        // }
+        Random rand = new Random();
+        int n = 100;
+        int[] arr3 = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr3[i] = rand.nextInt(1_000_000); // random numbers up to 1 million
+        }
 
-        // int resPatience = lisPatienceSorting(arr3);
-        // System.out.println("Patience LIS length: " + resPatience);
+        int resPatience = lisPatienceSorting(arr1);
+        System.out.println("Patience LIS length: " + resPatience);
 
-        // int resNaive = lisRecursive(arr3);
-        // System.out.println("Naive LIS length: " + resNaive);
+        int resNaive = lisRecursive(arr1);
+        System.out.println("Naive LIS length: " + resNaive);
     }
 }
