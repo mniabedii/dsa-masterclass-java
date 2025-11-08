@@ -22,15 +22,7 @@ public class ArrayQueue {
             return;
         }
 
-        // Queue is empty
-        if (isEmpty()) {
-            front = rear = 0;
-            queue[rear] = value;
-            return;
-        }
-
-        // Queue is not full or empty
-        queue[rear++] = value;
+        queue[++rear] = value;
     }
 
     public int dequeue() {
@@ -42,15 +34,7 @@ public class ArrayQueue {
             return -1;
         }
 
-        // Queue has only one element
-        if (front == rear) {
-            int value = queue[rear];
-            front = rear = -1;
-            return value;
-        }
-
-        // Queue has more than one element
-        return queue[front++];
+        return queue[++front];
     }
 
     public int peek() {
@@ -71,7 +55,7 @@ public class ArrayQueue {
     }
 
     public boolean isEmpty() {
-        return rear == front && front == -1;
+        return rear == front;
     }
 
     public boolean isFull() {
@@ -81,7 +65,7 @@ public class ArrayQueue {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("front -> ");
-        for (int i = front; i <= rear; i++) {
+        for (int i = front + 1; i <= rear; i++) {
             s.append(queue[i]).append(" -> ");
         }
         s.append("rear");
