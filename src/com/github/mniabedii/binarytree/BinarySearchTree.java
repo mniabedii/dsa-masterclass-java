@@ -76,7 +76,7 @@ public class BinarySearchTree {
         return current;
     }
 
-    public TreeNode findMax() {
+    public TreeNode findMax(TreeNode root) {
         if (root == null)
             return null;
 
@@ -85,6 +85,50 @@ public class BinarySearchTree {
             current = current.right;
         }
         return current;
+    }
+
+    public TreeNode successor(int value) {
+        TreeNode current = root;
+        TreeNode succ = null;
+
+        while (current != null) {
+            if (value < current.value) {
+                succ = current;
+                current = current.left;
+            } else if (value > current.value) {
+                current = current.right;
+            } else {
+                // Node found
+                if (current.right != null) {
+                    return findMin(current.right);
+                }
+                break;
+            }
+        }
+
+        return succ;
+    }
+
+    public TreeNode predecessor(int value) {
+        TreeNode current = root;
+        TreeNode pred = null;
+
+        while (current != null) {
+            if (value < current.value) {
+                current = current.left;
+            } else if (value > current.value) {
+                pred = current;
+                current = current.right;
+            } else {
+                // Node found
+                if (current.left != null) {
+                    return findMax(current.left);
+                }
+                break;
+            }
+        }
+
+        return pred;
     }
 
     // Deletion:
@@ -125,5 +169,4 @@ public class BinarySearchTree {
         }
         return current; // Return the updated node
     }
-
 }
