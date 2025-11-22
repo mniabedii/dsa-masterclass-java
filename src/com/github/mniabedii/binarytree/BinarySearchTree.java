@@ -60,6 +60,9 @@ public class BinarySearchTree {
     }
 
     private void recursiveInOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
         recursiveInOrder(root.left);
         System.out.println(root.value);
         recursiveInOrder(root.right);
