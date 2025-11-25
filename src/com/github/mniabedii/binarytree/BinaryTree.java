@@ -155,7 +155,7 @@ public class BinaryTree {
             return;
 
         inOrder(root.left);
-        System.out.println(root.right);
+        System.out.println(root);
         inOrder(root.right);
     }
 
