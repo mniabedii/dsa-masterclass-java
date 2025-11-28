@@ -36,7 +36,7 @@ public class QuickSort {
          * Elements from low to i are smaller after every iteration.
          */
         for (int j = low; j < high; j++) {
-            // if the current element is smaller than or equal to the pivot
+            // if the current element is smaller than the pivot
             if (arr[j] < pivot) {
                 i++; // Increment the index of the smaller element
                 // Swap arr[i] & arr[j]
