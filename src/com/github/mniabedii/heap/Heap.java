@@ -13,8 +13,6 @@ public class Heap {
     private int capacity;
     private final HeapType type;
 
-    // ---------- Constructors ----------
-
     public Heap(int capacity, HeapType type) {
         this.capacity = capacity;
         this.size = 0;
@@ -27,8 +25,7 @@ public class Heap {
         this(capacity, HeapType.MIN_HEAP);
     }
 
-    // ---------- Core Helper Methods ----------
-
+    // Util Methods
     private int parent(int index) {
         return (index - 1) / 2; // 0-based version of ⌊i/2⌋
     }
@@ -57,18 +54,11 @@ public class Heap {
         heap[j] = temp;
     }
 
-    private void ensureCapacity() {
-        if (size == capacity) {
-            capacity = capacity * 2;
-            heap = Arrays.copyOf(heap, capacity);
-        }
-    }
-
     public boolean isEmpty() {
         return size == 0;
     }
 
-    // ---------- Heapify-Up (Percolate Up) ----------
+    // Heapify-Up (Percolate Up) O(lg(n))
 
     private void heapifyUp(int index) {
         while (index > 0) {
@@ -84,7 +74,7 @@ public class Heap {
         }
     }
 
-    // ---------- Heapify-Down (Percolate Down) ----------
+    // Heapify-Down (Percolate Down) O(lg(n))
 
     private void heapifyDown(int index) {
         while (true) {
@@ -110,10 +100,9 @@ public class Heap {
         }
     }
 
-    // ---------- Insertion ----------
+    // Insertion O(lg(n))
 
     public void insert(int value) {
-        ensureCapacity();
         heap[size] = value;
         size++;
 
@@ -121,7 +110,7 @@ public class Heap {
         heapifyUp(size - 1);
     }
 
-    // ---------- Peek (Find-Min / Find-Max) ----------
+    // Peek (Find-Min / Find-Max) O(1)
 
     public int peek() throws Exception {
         if (size == 0) {
@@ -130,23 +119,8 @@ public class Heap {
         return heap[0];
     }
 
-    public int findMin() throws Exception {
-        if (type != HeapType.MIN_HEAP) {
-            throw new IllegalStateException("findMin() called on a max-heap");
-        }
-        return peek();
-    }
+    // Extract-Min / Extract-Max O(lg(n))
 
-    public int findMax() throws Exception {
-        if (type != HeapType.MAX_HEAP) {
-            throw new IllegalStateException("findMax() called on a min-heap");
-        }
-        return peek();
-    }
-
-    // ---------- Extract-Min / Extract-Max ----------
-
-    // Root extraction
     private int extractRoot() throws Exception {
         if (size == 0) {
             throw new Exception("Underflow: heap is empty");
@@ -156,28 +130,11 @@ public class Heap {
         heap[0] = heap[size - 1];
         size--;
 
-        // Restore heap-order property
-        if (size > 0) {
-            heapifyDown(0);
-        }
+        heapifyDown(0);
         return root;
     }
 
-    public int extractMin() throws Exception {
-        if (type != HeapType.MIN_HEAP) {
-            throw new IllegalStateException("extractMin() called on a max-heap");
-        }
-        return extractRoot();
-    }
-
-    public int extractMax() throws Exception {
-        if (type != HeapType.MAX_HEAP) {
-            throw new IllegalStateException("extractMax() called on a min-heap");
-        }
-        return extractRoot();
-    }
-
-    // ---------- Build-Heap (Floyd's Algorithm) ----------
+    // Build-Heap (Floyd's Algorithm)
 
     // Build heap from an arbitrary array (O(n))
     public void buildHeap(int[] arr) {
@@ -191,11 +148,11 @@ public class Heap {
         }
     }
 
-    // ---------- Heap Sort (In-place, O(n log n)) ----------
+    // Heap Sort (In-place, O(n log n))
 
     // NOTE: This uses a max-heap to get ascending order.
     public static void heapSort(int[] arr) {
-        // Build a max-heap on a copy to keep the function self-contained
+
         Heap maxHeap = new Heap(arr.length, HeapType.MAX_HEAP);
         maxHeap.buildHeap(arr);
 
@@ -213,23 +170,12 @@ public class Heap {
         }
     }
 
-    // ---------- Priority Queue Operations ----------
-
+    // Priority Queue Operations
     /**
      * Decrease the key at index i to newKey (for MIN_HEAP).
      * This increases its priority (lower key = higher priority).
      */
     public void decreaseKey(int index, int newKey) {
-        if (type != HeapType.MIN_HEAP) {
-            throw new IllegalStateException("decreaseKey is defined for min-heap semantics");
-        }
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of range");
-        }
-        if (newKey > heap[index]) {
-            throw new IllegalArgumentException("newKey must be <= current key for decreaseKey");
-        }
-
         heap[index] = newKey;
         heapifyUp(index);
     }
@@ -239,15 +185,6 @@ public class Heap {
      * This increases its priority (higher key = higher priority).
      */
     public void increaseKey(int index, int newKey) {
-        if (type != HeapType.MAX_HEAP) {
-            throw new IllegalStateException("increaseKey is defined for max-heap semantics");
-        }
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index out of range");
-        }
-        if (newKey < heap[index]) {
-            throw new IllegalArgumentException("newKey must be >= current key for increaseKey");
-        }
 
         heap[index] = newKey;
         heapifyUp(index);
@@ -263,18 +200,13 @@ public class Heap {
         }
 
         if (type == HeapType.MIN_HEAP) {
-            // For min-heap: decrease key to -∞, then extractMin
+            // For min-heap: decrease key to -inf, then extractMin
             decreaseKey(index, Integer.MIN_VALUE);
-            extractMin();
+            extractRoot();
         } else {
-            // For max-heap: increase key to +∞, then extractMax
+            // For max-heap: increase key to +inf, then extractMax
             increaseKey(index, Integer.MAX_VALUE);
-            extractMax();
+            extractRoot();
         }
-    }
-
-    // Optional helper to see the underlying array (for teaching / debugging)
-    public int[] toArray() {
-        return Arrays.copyOf(heap, size);
     }
 }
