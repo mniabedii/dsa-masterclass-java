@@ -133,78 +133,78 @@ public class AVLTree {
     }
 
     // but there must be a private delete method to overwrite the current root
-    private AVLNode delete(AVLNode root, int value) {
+    private AVLNode delete(AVLNode node, int value) {
         // Perform standard BST delete
-        if (root == null) {
-            return root;
+        if (node == null) {
+            return node;
         }
 
-        if (value < root.value) {
-            root.left = delete(root.left, value);
-        } else if (value > root.value) {
-            root.right = delete(root.right, value);
+        if (value < node.value) {
+            node.left = delete(node.left, value);
+        } else if (value > node.value) {
+            node.right = delete(node.right, value);
         } else {
             // Node with one child or no child
-            if ((root.left == null) || (root.right == null)) {
+            if ((node.left == null) || (node.right == null)) {
                 AVLNode temp;
-                if (root.left != null)
-                    temp = root.left;
+                if (node.left != null)
+                    temp = node.left;
                 else
-                    temp = root.right;
+                    temp = node.right;
 
                 // Not & One child case
-                root = temp;
+                node = temp;
             } else {
                 // Node with two children: Get the inorder successor
-                AVLNode temp = inOrderSuccessor(root);
+                AVLNode temp = inOrderSuccessor(node);
 
                 // Copy the inorder successor's key to this node
-                root.value = temp.value;
+                node.value = temp.value;
 
                 // Delete the inorder successor
-                root.right = delete(root.right, temp.value);
+                node.right = delete(node.right, temp.value);
             }
         }
 
         // If the tree had only one node, return null
-        if (root == null)
+        if (node == null)
             return null;
 
         // Update height of the current node & get the new balance
-        root.height = Math.max(height(root.left), height(root.right)) + 1;
-        int balance = getBalance(root);
+        node.height = Math.max(height(node.left), height(node.right)) + 1;
+        int balance = getBalance(node);
 
         // check to see if the tree has become unbalanced
         if (balance > 1) { // Left subtree is heavier (deletion in right subtree)
 
             // Left-Left (LL) Case
-            if (getBalance(root.left) >= 0) { // left side is heavier
-                return rightRotate(root);
+            if (getBalance(node.left) >= 0) { // left side is heavier
+                return rightRotate(node);
             }
 
             // Left-Right (LR) Case
-            if (getBalance(root.left) < 0) { // right side is heavier
-                root.left = leftRotate(root.left);
-                return rightRotate(root);
+            if (getBalance(node.left) < 0) { // right side is heavier
+                node.left = leftRotate(node.left);
+                return rightRotate(node);
             }
         }
 
         if (balance < -1) { // Right subtree is heavier (deletion in left subtree)
 
             // Right-Right (RR) Case
-            if (getBalance(root.right) <= 0) { // right side is heavier
-                return leftRotate(root);
+            if (getBalance(node.right) <= 0) { // right side is heavier
+                return leftRotate(node);
             }
 
             // Right-Left (RL) Case
-            if (getBalance(root.right) > 0) { // left side is heavier
-                root.right = rightRotate(root.right);
-                return leftRotate(root);
+            if (getBalance(node.right) > 0) { // left side is heavier
+                node.right = rightRotate(node.right);
+                return leftRotate(node);
             }
         }
 
-        // Return the new root
-        return root;
+        // Return the new node
+        return node;
     }
 
     // Utility function to find the node with the smallest key
